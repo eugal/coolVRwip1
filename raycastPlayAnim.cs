@@ -6,13 +6,14 @@ public class VRCursor : MonoBehaviour {
 
 PlayAnimation lastPlayedPa = null;
 
-//how does this work
+//could be a bool instead 
 public enum HoverState{HOVER, NONE};
 public HoverState hover_state = HoverState.NONE;
 
 void CheckCollision()
     {
         RaycastHit hitInfo;
+
 		
 
         if (Physics.Raycast(transform.position, cursor.transform.position - transform.position, out hitInfo)){
@@ -32,8 +33,11 @@ void CheckCollision()
 					hover_state = HoverState.HOVER; 
 			}
 		}
-
+			//instead of having to find a gameobject here i want to stop the animation on the object i was looking at before
 			StopAnimation sa = GameObject.Find("model2").GetComponent<StopAnimation>();
+			//i think i need to take the variable from line 25 and hold it somewhere only to be triggered when your not looking 
+			//at the the collider anymore. 
+
 
 		if(hover_state == HoverState.HOVER){
 			//stop playing script when you look away
